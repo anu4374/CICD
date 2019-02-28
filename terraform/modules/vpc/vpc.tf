@@ -6,14 +6,14 @@ resource "aws_vpc" "infra" {
 
   tags {
     Name = "${var.environment} VPC"
-  }
+       }
 }
 
 # Create Public Subnets
 resource "aws_subnet" "PublicSubnet" {
-  count                   = "${length(data.aws_availability_zones.available.names)}"
+  count                   = "${length(var.deploy_availability_zones)}"
   vpc_id                  = "${aws_vpc.infra.id}"
-  availability_zone       = "${data.aws_availability_zones.available.names[count.index]}"
+  availability_zone       = "${var.deploy_availability_zones[count.index]}"
   cidr_block              = "${var.vpc_net_block}${var.public_subnet_cidrs[count.index]}"
   map_public_ip_on_launch = false
 
@@ -56,9 +56,9 @@ resource "aws_route_table_association" "PublicRouteTableAssoc" {
 
 # Create Private Subnets
 resource "aws_subnet" "PrivateSubnet" {
-  count                   = "${length(data.aws_availability_zones.available.names)}"
+  count                   = "${length(var.deploy_availability_zones)}"
   vpc_id                  = "${aws_vpc.infra.id}"
-  availability_zone       = "${data.aws_availability_zones.available.names[count.index]}"
+  availability_zone       = "${var.deploy_availability_zones[count.index]}"
   cidr_block              = "${var.vpc_net_block}${var.private_subnet_cidrs[count.index]}"
   map_public_ip_on_launch = false
 
@@ -108,7 +108,7 @@ resource "aws_route_table_association" "PrivateRouteTableAssoc" {
 
 # peering env VPC with default VPC where jenkins executes terraform to create instances and invokes anisble
 resource "aws_vpc_peering_connection" "defaultPeering" {
-  peer_owner_id = "055379498794"          # Change this with your AWS account ID
+  peer_owner_id = "763670009215"          # Change this with your AWS account ID
   peer_vpc_id   = "${var.default_vpc_id}"
   vpc_id        = "${aws_vpc.infra.id}"
   auto_accept   = true

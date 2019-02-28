@@ -1,6 +1,6 @@
 #AWS region
 variable "aws_region" {
-  default = "us-west-2"
+  default = "us-east-2"
 }
 
 variable "environment" {
@@ -9,7 +9,7 @@ variable "environment" {
 
 #key pair name
 variable "key_name" {
-  default = "jenkins"
+  default = "DevOps"
 }
 
 variable "ssh_user" {
@@ -27,5 +27,5 @@ variable "instance_type_micro" {
 
 #Amazon Linux AMI
 variable "ami" {
-  default = "ami-01e24be29428c15b2"
+  default = "ami-0b59bfac6be064b78"
 }

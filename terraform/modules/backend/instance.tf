@@ -13,11 +13,9 @@ resource "aws_instance" "app" {
   root_block_device {
     volume_size = 40
   }
-
   provisioner "local-exec" {
-    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False /usr/local/bin/ansible-playbook -u ${var.ssh_user} --private-key ~/.ssh/jenkins.pem -i '${self.private_ip},' '../../ansible/site.yml'"
+    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False /usr/local/bin/ansible-playbook -u ${var.ssh_user} --private-key ~/.ssh/DevOps.pem -i '${self.public_ip},' '../../ansible/site.yml'"
   }
-
   tags {
     "Name" = "${var.appName}-${var.environment}-${count.index + 1}"
   }
@@ -53,7 +51,6 @@ resource "aws_elb" "app" {
     Name = "${var.appName}-elb"
   }
 }
-
 output "ELB_endpoint" {
   value = "${aws_elb.app.dns_name}"
 }
