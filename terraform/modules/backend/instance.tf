@@ -14,7 +14,7 @@ resource "aws_instance" "app" {
     volume_size = 40
   }
   provisioner "local-exec" {
-    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False /usr/local/bin/ansible-playbook -u ${var.ssh_user} --private-key ~/.ssh/DevOps.pem -i '${self.public_ip},' '../../ansible/site.yml'"
+    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False /bin/ansible-playbook -u ${var.ssh_user} --private-key ~/.ssh/DevOps.pem -i '${self.private_ip},' '../../ansible/site.yml'"
   }
   tags {
     "Name" = "${var.appName}-${var.environment}-${count.index + 1}"
