@@ -6,6 +6,7 @@ pipeline {
     tools {
         maven 'Maven'
         jdk 'Java'
+        tool name 'Terraform'
     }
     stages {
         stage ('Build') {
