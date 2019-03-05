@@ -6,7 +6,6 @@ pipeline {
     tools {
         maven 'Maven'
         jdk 'Java'
-        toolname 'terraform'
     }
     stages {
         stage ('Build') {
@@ -16,7 +15,7 @@ pipeline {
                           cp -R target/*.war ansible/hello-world.war'''
                 }
                 dir ('source/terraform/dev') {
-                                    sh 'terraform init && terraform apply -auto-approve'
+                                    sh 'terraform init -input=false && terraform apply -auto-approve'
                                 }               
 
             }
