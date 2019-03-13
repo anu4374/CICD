@@ -1,6 +1,7 @@
 provider "aws" {
   region  = "${var.aws_region}"
-  profile = "anuhya"
+  shared_credentials_file = "/home/ec2-user/.aws/credentials"
+  profile = "default"
   version = "1.23.0"
 }
 
