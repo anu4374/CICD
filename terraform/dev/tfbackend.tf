@@ -1,8 +1,9 @@
 terraform {
   backend "s3" {
-    bucket  = "demo-anuhya"
+    bucket  = "cicd-anuhya"
     key     = "tf/us-east-2/dev.json"
     region  = "us-east-2"
-    profile = "anuhya"
+    shared_credentials_file = "/home/ec2-user/.aws/credentials"
+    profile = "default"
   }
 }
