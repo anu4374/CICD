@@ -9,7 +9,7 @@ variable "environment" {
 
 #key pair name
 variable "key_name" {
-  default = "DevOps"
+  default = "CICD"
 }
 
 variable "ssh_user" {
