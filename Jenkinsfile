@@ -15,7 +15,7 @@ pipeline {
                           cp -R target/*.war ansible/hello-world.war'''
                 }
                   dir ('source/terraform/dev') {
-                                    sh 'terraform init TF_LOG=DEBUG && terraform get -update && terraform refresh  && terraform apply -auto-approve'
+                                    sh 'terraform init TF_LOG=DEBUG && terraform get -update && terraform refresh && terraform init TF_LOG=DEBUG && terraform apply -auto-approve'
                                 } 
             }    
             
